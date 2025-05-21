@@ -1,17 +1,6 @@
 # Trabalho 1 - Devops/ Prática com Docker
 
-Sistema para oferta de vagas de estágios/empregos (A)<br /><br />
-
 Esta é uma aplicação web Java Spring Boot para gerenciamento de vagas de estágio/emprego, com persistência de dados em banco MySQL e envio de e-mails via SMTP. A aplicação foi **dockerizada** e é executada com múltiplos contêineres, conforme prática solicitada para o exercício.
-
-## 🧾 Descrição
-
-O sistema permite que **empresas cadastrem vagas** e **profissionais se candidatem**, com autenticação, listagens e envio de status por e-mail. A arquitetura utiliza:
-
-- Backend em **Java Spring Boot**
-- Banco de dados **MySQL**
-- Interface de administração com **Adminer**
-- Sistema de envio de **e-mails via SMTP (Gmail)**
 
 ## 📦 Estrutura de Contêineres
 
@@ -54,25 +43,27 @@ Todos os serviços se comunicam por **nome de contêiner**, conforme exigência 
 ## 📝 Configuração Importante
 
 
-Para executar o sistema corretamente, você precisa editar as variáveis de ambiente no docker-compose.yml e no application.properties:
+- Para executar o sistema corretamente, você precisa editar as variáveis de ambiente no **docker-compose.yml** e no **application.properties**:
 
 
-🔐 Senha do MySQL
 
-Substitua seu_username_aqui e sua_senha_aqui pela user e senha real que você usou ao instalar o MySQL no seu computador.
+<h3>🔐 Senha do MySQL</h3>
 
+Substitua *seu_username_aqui* e *sua_senha_aqui* pela user e senha real que você usou ao instalar o MySQL no seu computador.
 
-Exemplo: se você usa "root" como user, e "root1" como senha troque:
+### 🧪 Exemplo
 
-spring.datasource.username=seu_username_aqui
+Se você usa root como usuário e root1 como senha, troque:
 
-spring.datasource.password=sua_senha_aqui
+- spring.datasource.username=seu_username_aqui
+
+- spring.datasource.password=sua_senha_aqui
 
 por:
 
-spring.datasource.username=root
+- spring.datasource.username=root
 
-spring.datasource.password=root1
+- spring.datasource.password=root1
 
 📧 Senha do Gmail
 
@@ -113,7 +104,13 @@ A aplicação só inicia após o banco estar saudável (depends_on + healthcheck
 
 - git clone (https://github.com/natycristina/Trabalho1-devops.git)
 
-3. **Execute os contêineres**
+2. **Abra a pasta onde o repositorio foi clonado**
+    
+No meu caso é:
+
+cd  C:\Users\Nataly\Trabalho1-devops> 
+
+4. **Execute os contêineres**
 
 Execute a aplicação com Docker Compose
 
