@@ -1,96 +1,83 @@
-# AA2: Desenvolvimento de um sistema utilizando Spring MVC e JPA
+# Trabalho 1 - Devops/ Prática com Docker
 
-<h2> Sistema </h2>
 Sistema para oferta de vagas de estágios/empregos (A)<br /><br />
 
-<h2> Arquitetura: </h2>
-Modelo-Visão-Controlador<br /><br />
+Este projeto é uma aplicação web Java Spring Boot para gerenciamento de vagas de estágio/emprego, com persistência de dados em banco MySQL e envio de e-mails via SMTP. A aplicação foi **dockerizada** e é executada com múltiplos contêineres, conforme prática solicitada para o exercício.
 
-<h2> Tecnologias </h2>
-<li>Spring MVC, Spring Data JPA, Spring Security & Thymeleaf (Lado Servidor)</li>
-<li>Javascript & CSS (Lado Cliente)</li><br />
+## 🧾 Descrição
 
-<h2>Usuários criados</h2>
-<h3>Administrador</h3>
-<li>login: admin</li>
-<li>senha: admin </li>
+O sistema permite que **empresas cadastrem vagas** e **profissionais se candidatem**, com autenticação, listagens e envio de status por e-mail. A arquitetura utiliza:
 
-<h3>Empresa</h3>
-<h3>1</h3>
-<li>login: amazon</li>
-<li>senha: empresa </li>
-<h3>2</h3>
-<li>login: visagio</li>
-<li>senha: empresa </li>
+- Backend em **Java Spring Boot**
+- Banco de dados **MySQL**
+- Interface de administração com **Adminer**
+- Sistema de envio de **e-mails via SMTP (Gmail)**
 
+## 📦 Estrutura de Contêineres
 
-<h3>Profissional</h3>
-<h3>1</h3>
-<li>login: matheus.d.sousall@gmail.com</li>
-<li>senha: profissional </li>
-<h3>2</h3>
-<li>login: annacarolinafarias@hotmail.com</li>
-<li>senha: profissional </li>
-<br />
+Este projeto usa 3 contêineres, conforme exigência para trabalho individual:
 
-<h2>R1:</h2>
+| Serviço   | Descrição                                       | Porta       |
+|-----------|-------------------------------------------------|-------------|
+| `app`     | Backend Spring Boot (compilado com Maven)       | `8080`      |
+| `db`      | Banco de dados MySQL                            | `3306`      |
+| `adminer` | Interface para gerenciar banco (Adminer)        | `8081`      |
 
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
+Todos os serviços se comunicam por **nome de contêiner**, conforme exigência do trabalho (não utilizam `localhost` entre si).
 
-Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
+## ⚙️ Tecnologias Utilizadas
 
+- **Java 17**
+- **Spring Boot**
+- **Spring Data JPA + Hibernate**
+- **MySQL 8**
+- **Maven**
+- **Docker / Docker Compose**
+- **Adminer**
+- **SMTP Gmail**
 
-<h2>R2:</h2>
+## 📁 Estrutura dos Arquivos
 
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
+.
+├── Dockerfile # Build da aplicação em 2 etapas
+├── docker-compose.yml # Orquestração dos contêineres
+├── src/ # Código-fonte Java (Spring Boot)
+├── pom.xml # Dependências Maven
+├── application.properties # Configurações Spring Boot
+└── README.md # Este documento
 
-Divisão na implementação da funcionalidade: Anna (), Matheus (), Karys () e Nataly () <br/>
+## 🚀 Como Executar o Projeto com Docker
 
+1. **Clone o repositório**
+2. 
+= git clone (https://github.com/natycristina/Trabalho1-devops.git)
 
-<h2>R3:</h2>
+cd (a basta onde foi clonado o repositorio)
 
-(X) Implementado () Parcialmente implementado ( ) Não implementado <br/>
+no meu caso:
+= cd C:\Users\Nataly\Documents\Devops\Trabalho1\Trabalho1-devops>
 
-Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
+3. **Comando para Compilar**
+4. 
+Execute a aplicação com Docker Compose
 
+- docker-compose up --build
 
-<h2>R4:</h2>
+4. **Aesse a aplicação**
 
-(X) Implementado () Parcialmente implementado ( ) Não implementado <br/>
+Acesse:
 
-Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
-
-
-
-<h2>R5:</h2>
-
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
-
-Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
-
-
-
-<h2>R6:</h2>
-
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
-
-Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
+- Aplicação Spring Boot: http://localhost:8080
 
 
-<h2>R7:</h2>
 
-(X) Implementado () Parcialmente implementado ( ) Não implementado <br/>
 
-Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
+Arquivos de Configuração
+Dockerfile
+O arquivo Dockerfile para a aplicação Spring Boot utiliza uma abordagem de múltiplos estágios:
 
-<h2>R8:</h2>
+Primeiro estágio: compila o código-fonte Java com Maven
+Segundo estágio: cria uma imagem mais leve apenas com o arquivo JAR executável 
 
-(x) Implementado () Parcialmente implementado ( ) Não implementado <br/>
-
-Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
-
-<h2>R9:</h2>
-
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado <br/>
-
-Divisão na implementação da funcionalidade: Anna (25%), Matheus (25%), Karys (25%) e Nataly (25%) <br/>
+Para parar os contêineres:
+docker-compose down
