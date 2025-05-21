@@ -106,22 +106,22 @@ A aplicação só inicia após o banco estar saudável (depends_on + healthcheck
 
 2. **Abra a pasta onde o repositorio foi clonado**
     
-No meu caso é:
+ No meu caso é:
 
-cd  C:\Users\Nataly\Trabalho1-devops> 
+ cd  C:\Users\Nataly\Trabalho1-devops> 
 
-4. **Execute os contêineres**
+3. **Execute os contêineres**
 
-Execute a aplicação com Docker Compose
+ Execute a aplicação com Docker Compose
 
 - docker-compose up --build
 
-3. **Aesse a aplicação**
+4. **Aesse a aplicação**
    
 - Aplicação Spring Boot: http://localhost:8080
 
 - Acesse o banco pelo Adminer: http://localhost:8081
 
-4. **Parar os contêineres**
+5. **Parar os contêineres**
    
 - docker-compose down
