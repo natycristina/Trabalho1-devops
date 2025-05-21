@@ -9,7 +9,7 @@ services:
     environment:
       # Conexão com o banco
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/EmpresaVaga?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_USERNAME: seu_username-aqui
       SPRING_DATASOURCE_PASSWORD: sua_senha_aqui
       # Configuração do Hibernate
       SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
