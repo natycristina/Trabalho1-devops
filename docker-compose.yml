@@ -20,8 +20,8 @@ services:
       SPRING_MAIL_PORT: 465
       SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: true
       SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE: true
-      SPRING_MAIL_USERNAME: msous@estudante.ufscar.br
-      SPRING_MAIL_PASSWORD: duksbhktngrhkssy
+      SPRING_MAIL_USERNAME: nataly@.ufscar.br
+      SPRING_MAIL_PASSWORD: sua_senha_aqui
     depends_on:
       db:
         condition: service_healthy
@@ -33,7 +33,7 @@ services:
     image: mysql:8
     container_name: mysql_db
     environment:
-      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: sua_senha_aqui
       MYSQL_DATABASE: EmpresaVaga
     ports:
       - "3306:3306"
