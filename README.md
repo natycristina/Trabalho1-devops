@@ -38,7 +38,7 @@ Todos os serviços se comunicam por **nome de contêiner**, conforme exigência 
 
 ## 📁 Estrutura dos Arquivos
 
-.
+
 ├── Dockerfile # Build da aplicação em 2 etapas
 
 ├── docker-compose.yml # Orquestração dos contêineres
@@ -53,41 +53,55 @@ Todos os serviços se comunicam por **nome de contêiner**, conforme exigência 
 
 ## 📝 Configuração Importante
 
+
 Para executar o sistema corretamente, você precisa editar as variáveis de ambiente no docker-compose.yml e no application.properties:
 
-🔐 Senha do MySQL
-Substitua seu_username e sua_senha_aqui pela user e senha real que você usou ao instalar o MySQL no seu computador.
 
-Exemplo: se você usa "root" como user, e "roo1" como senha troque:
+🔐 Senha do MySQL
+
+Substitua seu_username_aqui e sua_senha_aqui pela user e senha real que você usou ao instalar o MySQL no seu computador.
+
+
+Exemplo: se você usa "root" como user, e "root1" como senha troque:
 
 spring.datasource.username=seu_username_aqui
+
 spring.datasource.password=sua_senha_aqui
 
 por:
 
 spring.datasource.username=root
+
 spring.datasource.password=root1
 
 📧 Senha do Gmail
+
 Também é necessário fornecer um e-mail e uma senha de aplicativo do Gmail para que o envio de e-mails funcione corretamente.
 
-📦 Explicação dos Arquivos Docker
+## 📦 Explicação dos Arquivos Docker
+
 ## Dockerfile
 
 Este arquivo contém duas etapas de construção:
 
-Build Stage: Usa uma imagem Maven + JDK 17 para compilar o projeto Java com mvn clean package.
 
-Production Stage: Copia o JAR gerado para uma imagem mais leve (OpenJDK) e executa o aplicativo com java -jar.
+- **Build Stage**: Usa uma imagem Maven + JDK 17 para compilar o projeto Java com mvn clean package.
+
+- **Production Stage**: Copia o JAR gerado para uma imagem mais leve (OpenJDK) e executa o aplicativo com java -jar.
 
 ## docker-compose.yml
 
 Este arquivo orquestra três contêineres:
 
-Serviço	Descrição	Porta
-app	Backend Spring Boot (Java)	8080
-db	Banco de dados MySQL	3306
-adminer	Interface web para gerenciar o banco	8081
+
+- Serviço	Descrição	Porta
+  
+- app	Backend Spring Boot (Java)	8080
+  
+- db	Banco de dados MySQL	3306
+
+- adminer	Interface web para gerenciar o banco	8081
+
 
 Todos os serviços estão conectados na mesma rede (devops-net), permitindo comunicação por nome do serviço (por exemplo, db, e não localhost).
 
@@ -97,7 +111,7 @@ A aplicação só inicia após o banco estar saudável (depends_on + healthcheck
 
 1. **Clone o repositório**
 
-= git clone (https://github.com/natycristina/Trabalho1-devops.git)
+- git clone (https://github.com/natycristina/Trabalho1-devops.git)
 
 3. **Execute os contêineres**
 
