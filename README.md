@@ -120,6 +120,8 @@ Execute a aplicação com Docker Compose
    
 - Aplicação Spring Boot: http://localhost:8080
 
+- Acesse o banco pelo Adminer: http://localhost:8081
+
 4. **Parar os contêineres**
    
 - docker-compose down
