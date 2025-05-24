@@ -8,20 +8,16 @@ services:
       - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/EmpresaVaga?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_DATASOURCE_USERNAME: seu_username_aqui
+      SPRING_DATASOURCE_PASSWORD: sua_senha_aqui
       SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
       SPRING_JPA_SHOW_SQL: true
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
-      SPRING_MAIL_HOST: smtp.gmail.com
-      SPRING_MAIL_PORT: 465
-      SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: true
-      SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE: true
-      SPRING_MAIL_USERNAME: nataly@ufscar.br
-      SPRING_MAIL_PASSWORD: sua_senha_aqui
     depends_on:
       db:
         condition: service_healthy
+      email-service:
+        condition: service_started
     networks:
       - devops-net
     restart: on-failure
@@ -44,13 +40,27 @@ services:
       timeout: 5s
       retries: 5
 
-  adminer:
-    build: ./adminer
-    container_name: adminer_ui
+  email-service:
+    build: ./email-service
+    container_name: email_service
     ports:
-      - "8081:8080"
+      - "8081:8081"
+    environment:
+      SPRING_MAIL_HOST: smtp.gmail.com
+      SPRING_MAIL_PORT: 465
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: true
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE: true
+      # IMPORTANTE: Substitua por suas credenciais reais
+      SPRING_MAIL_USERNAME: seu_email_que_gostaria_de_receber_o_gmail
+      SPRING_MAIL_PASSWORD: sua_senha_do_gmail_para_app
     networks:
       - devops-net
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/api/email/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
 networks:
   devops-net:

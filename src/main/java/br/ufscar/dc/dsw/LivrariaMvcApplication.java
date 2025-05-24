@@ -80,10 +80,10 @@ public class LivrariaMvcApplication {
 			empresaDAO.save(e3);
 
 			Profissional p1 = new Profissional();
-			p1.setCpf("837.424.045-50");
-			p1.setNasc("10/07/2002");
+			p1.setCpf("007.004.005-00");
+			p1.setNasc("19/06/2000");
 			p1.setSexo("Masculino");
-			p1.setTelefone("(11) 94528-4695");
+			p1.setTelefone("(10) 94008-4695");
 			p1.setEmail("matheus.d.sousall@gmail.com");
 			p1.setPassword(encoder.encode("profissional"));
 			p1.setName("Matheus");
@@ -92,10 +92,10 @@ public class LivrariaMvcApplication {
 			profissionalDAO.save(p1);
 
 			Profissional p2 = new Profissional();
-			p2.setCpf("062.408.045-50");
-			p2.setNasc("03/03/2001");
+			p2.setCpf("046.454.000-00");
+			p2.setNasc("23/04/2011");
 			p2.setSexo("Feminino");
-			p2.setTelefone("(11) 94528-4695");
+			p2.setTelefone("(19) 99828-4695");
 			p2.setEmail("annacarolinafarias@hotmail.com");
 			p2.setPassword(encoder.encode("profissional"));
 			p2.setName("Anna");
@@ -103,31 +103,42 @@ public class LivrariaMvcApplication {
 			p2.setEnabled(true);
 			profissionalDAO.save(p2);
 
+			Profissional p3 = new Profissional();
+			p3.setCpf("000.008.034-60");
+			p3.setNasc("03/03/2001");
+			p3.setSexo("Feminino");
+			p3.setTelefone("(11) 94528-4695");
+			p3.setEmail("nataly.cristina@estudante.ufscar.br");
+			p3.setPassword(encoder.encode("profissional"));
+			p3.setName("Nataly");
+			p3.setRole("ROLE_PROFISSIONAL");
+			p3.setEnabled(true);
+			profissionalDAO.save(p3);
 
 			Vaga v1 = new Vaga();
 			v1.setDescricao("Desenvolvedor Java Estágio");
-			v1.setDataLimite("10/11/2024"); 
+			v1.setDataLimite("10/11/2025"); 
 			v1.setRemuneracao(new BigDecimal("1500.00")); 
 			v1.setEmpresa(e1); 
 			vagaDAO.save(v1);
 
 			Vaga v2 = new Vaga();
 			v2.setDescricao("Desenvolvedor Python Estágio");
-			v2.setDataLimite("10/11/2024"); 
+			v2.setDataLimite("10/11/2025"); 
 			v2.setRemuneracao(new BigDecimal("1500.00")); 
 			v2.setEmpresa(e1); 
 			vagaDAO.save(v2);
 
 			Vaga v3 = new Vaga();
 			v3.setDescricao("Cientista de Dados");
-			v3.setDataLimite("10/12/2024"); 
+			v3.setDataLimite("10/12/2025"); 
 			v3.setRemuneracao(new BigDecimal("2000.00")); 
 			v3.setEmpresa(e2); 
 			vagaDAO.save(v3);
 
 			Vaga v4 = new Vaga();
 			v4.setDescricao("Engenheiro de Dados");
-			v4.setDataLimite("08/09/2024"); 
+			v4.setDataLimite("08/09/2025"); 
 			v4.setRemuneracao(new BigDecimal("2000.00")); 
 			v4.setEmpresa(e2); 
 			vagaDAO.save(v4);

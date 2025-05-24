@@ -11,5 +11,8 @@ FROM openjdk:17-jdk-slim AS production-stage
 
 WORKDIR /app
 ENV TZ=America/Sao_Paulo
+# Adiciona curl
+RUN apt update && apt install curl -y
+
 COPY --from=build-stage /app/target/*.jar app.jar
 CMD ["java", "-jar", "app.jar"]
