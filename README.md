@@ -48,7 +48,7 @@ Para levantar e executar a aplicação, siga os passos abaixo. Certifique-se de 
     Edite o arquivo `docker-compose.yml` para configurar as credenciais do banco de dados e do serviço de e-mail.
     
     * No serviço `app`, altere `SPRING_DATASOURCE_USERNAME` e `SPRING_DATASOURCE_PASSWORD` para as credenciais do seu MySQL (ex: `root` e `root`).
-    * 
+      
     * No serviço `email-service`, forneça seu `SPRING_MAIL_USERNAME` (seu e-mail Gmail) e `SPRING_MAIL_PASSWORD` (sua senha de app do Gmail, se aplicável).
 
 5.  **Execute os Contêineres:**
