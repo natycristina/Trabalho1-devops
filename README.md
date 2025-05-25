@@ -1,127 +1,74 @@
-# Trabalho 1 - Devops/ Prática com Docker
+# Trabalho 1 - DevOps: Plataforma de Gestão de Vagas
 
-Esta é uma aplicação web Java Spring Boot para gerenciamento de vagas de estágio/emprego, com persistência de dados em banco MySQL e envio de e-mails via SMTP. A aplicação foi **dockerizada** e é executada com múltiplos contêineres, conforme prática solicitada para o exercício.
+Este repositório contém a implementação de uma aplicação web desenvolvida em **Java Spring Boot**. Ela permite a empresas cadastrar vagas e a profissionais se candidatarem, incluindo um serviço dedicado para **notificações por e-mail**. A aplicação é totalmente **containerizada com Docker** e orquestrada via **Docker Compose**, seguindo os requisitos da disciplina de DevOps.
+
+Para uma descrição completa da arquitetura, funcionalidades, e detalhes técnicos, por favor, consulte o **[Arquivo PDF de Descrição da Aplicação](Descrição da aplicação - Nataly (1).pdf)**.
+
+---
 
 ## 📦 Estrutura de Contêineres
 
-Este projeto usa 3 contêineres, conforme exigência para trabalho individual:
+A aplicação é composta por 3 contêineres principais:
 
-| Serviço   | Descrição                                       | Porta       |
-|-----------|-------------------------------------------------|-------------|
-| `app`     | Backend Spring Boot (compilado com Maven)       | `8080`      |
-| `db`      | Banco de dados MySQL                            | `3306`      |
-| `adminer` | Interface para gerenciar banco (Adminer)        | `8081`      |
+* **`spring_app` (Backend):** O coração da aplicação, gerencia a lógica de negócios e as interações com o banco de dados e o serviço de e-mail.
+  
+* **`db` (MySQL):** Banco de dados relacional para persistência de todos os dados da aplicação.
+  
+* **`email-service` (Serviço de E-mail):** Microsserviço dedicado ao envio de e-mails transacionais (como notificações de entrevista).
 
-Todos os serviços se comunicam por **nome de contêiner**, conforme exigência do trabalho (não utilizam `localhost` entre si).
+
+**Observação sobre Comunicação:** Todos os contêineres se comunicam entre si utilizando seus respectivos nomes de serviço (ex: `spring_app` se conecta a `db` e `email-service`), sem a necessidade de expor portas para o `localhost` para comunicação interna. Apenas o `spring_app` expõe a porta 8080 para acesso externo do usuário.
+
+---
 
 ## ⚙️ Tecnologias Utilizadas
 
-- **Java 17**
-- **Spring Boot**
-- **Spring Data JPA + Hibernate**
-- **MySQL 8**
-- **Maven**
-- **Docker / Docker Compose**
-- **Adminer**
-- **SMTP Gmail**
-
-## 📁 Estrutura dos Arquivos
-
-
-├── Dockerfile # Build da aplicação em 2 etapas
-
-├── docker-compose.yml # Orquestração dos contêineres
-
-├── src/ # Código-fonte Java (Spring Boot)
-
-├── pom.xml # Dependências Maven
-
-├── application.properties # Configurações Spring Boot
-
-└── README.md # Este documento
-
-## 📝 Configuração Importante
-
-
-- Para executar o sistema corretamente, você precisa editar as variáveis de ambiente no **docker-compose.yml** e no **application.properties**:
-
-
-
-<h3>🔐 Senha do MySQL</h3>
-
-Substitua *seu_username_aqui* e *sua_senha_aqui* pela user e senha real que você usou ao instalar o MySQL no seu computador.
-
-### 🧪 Exemplo
-
-Se você usa root como usuário e root1 como senha, troque:
-
-- spring.datasource.username=seu_username_aqui
-
-- spring.datasource.password=sua_senha_aqui
-
-por:
-
-- spring.datasource.username=root
-
-- spring.datasource.password=root1
-
-📧 Senha do Gmail
-
-Também é necessário fornecer um e-mail e uma senha de aplicativo do Gmail para que o envio de e-mails funcione corretamente.
-
-## 📦 Explicação dos Arquivos Docker
-
-## Dockerfile
-
-Este arquivo contém duas etapas de construção:
-
-
-- **Build Stage**: Usa uma imagem Maven + JDK 17 para compilar o projeto Java com mvn clean package.
-
-- **Production Stage**: Copia o JAR gerado para uma imagem mais leve (OpenJDK) e executa o aplicativo com java -jar.
-
-## docker-compose.yml
-
-Este arquivo orquestra três contêineres:
-
-
-- Serviço	Descrição	Porta
+* **Backend:** Java 17, Spring Boot, Spring Data JPA + Hibernate, Maven.
   
-- app	Backend Spring Boot (Java)	8080
+* **Banco de Dados:** MySQL 8.
   
-- db	Banco de dados MySQL	3306
+* **Containerização:** Docker, Docker Compose.
+  
+* **Serviço de E-mail:** Spring Boot (Java 17), SMTP (Gmail).
 
-- adminer	Interface web para gerenciar o banco	8081
-
-
-Todos os serviços estão conectados na mesma rede (devops-net), permitindo comunicação por nome do serviço (por exemplo, db, e não localhost).
-
-A aplicação só inicia após o banco estar saudável (depends_on + healthcheck).
+---
 
 ## 🚀 Como Executar o Projeto com Docker
 
-1. **Clone o repositório**
+Para levantar e executar a aplicação, siga os passos abaixo. Certifique-se de ter o Docker e o Docker Compose instalados em sua máquina.
 
-- git clone (https://github.com/natycristina/Trabalho1-devops.git)
-
-2. **Abra a pasta onde o repositorio foi clonado**
+1.  **Clone o Repositório:**
     
- No meu caso é:
+    git clone [https://github.com/natycristina/Trabalho1-devops.git](https://github.com/natycristina/Trabalho1-devops.git)
+    
+    cd Trabalho1-devops
+  
 
- cd  C:\Users\Nataly\Trabalho1-devops> 
+3.  **Configurar Credenciais:**
+    Edite o arquivo `docker-compose.yml` para configurar as credenciais do banco de dados e do serviço de e-mail.
+    
+    * No serviço `app`, altere `SPRING_DATASOURCE_USERNAME` e `SPRING_DATASOURCE_PASSWORD` para as credenciais do seu MySQL (ex: `root` e `root`).
+    * 
+    * No serviço `email-service`, forneça seu `SPRING_MAIL_USERNAME` (seu e-mail Gmail) e `SPRING_MAIL_PASSWORD` (sua senha de app do Gmail, se aplicável).
 
-3. **Execute os contêineres**
+5.  **Execute os Contêineres:**
+    No diretório raiz do projeto (onde está o `docker-compose.yml`), execute:
+    
+    docker-compose up --build -d
+    
+    * `--build`: Constrói as imagens dos seus serviços a partir dos Dockerfiles.
+      
+    * `-d`: Inicia os contêineres em modo "detached" (em segundo plano).
 
- Execute a aplicação com Docker Compose
-
-- docker-compose up --build
-
-4. **Aesse a aplicação**
+6.  **Acesse a Aplicação:**
    
-- Aplicação Spring Boot: http://localhost:8080
+    Acesse a interface web da aplicação em seu navegador:
+    
+    [http://localhost:8080](http://localhost:8080)
 
-- Acesse o banco pelo Adminer: http://localhost:8081
+8.  **Parar os Contêineres:**
+    Para derrubar e remover os contêineres (e seus volumes, para limpar os dados do banco de dados):
+    
+    docker-compose down -v
 
-5. **Parar os contêineres**
-   
-- docker-compose down
+---
