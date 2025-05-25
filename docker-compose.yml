@@ -5,7 +5,7 @@ services:
     build: .
     container_name: spring_app
     ports:
-      - "8080:8080"
+      - "8080:8080" # <-- Esta permanece, pois é o ponto de acesso externo à sua aplicação
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/EmpresaVaga?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: seu_username_aqui
@@ -28,8 +28,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: sua_senha_aqui
       MYSQL_DATABASE: EmpresaVaga
-    ports:
-      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
@@ -43,8 +41,6 @@ services:
   email-service:
     build: ./email-service
     container_name: email_service
-    ports:
-      - "8081:8081"
     environment:
       SPRING_MAIL_HOST: smtp.gmail.com
       SPRING_MAIL_PORT: 465
@@ -57,7 +53,7 @@ services:
       - devops-net
     restart: on-failure
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8081/api/email/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8081/api/email/health"] # O healthcheck continuará funcionando internamente
       interval: 30s
       timeout: 10s
       retries: 3
