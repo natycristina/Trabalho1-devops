@@ -26,7 +26,7 @@ services:
     build: ./mysql
     container_name: mysql_db
     environment:
-      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: sua_senha_aqui
       MYSQL_DATABASE: EmpresaVaga
     ports:
       - "3306:3306"
